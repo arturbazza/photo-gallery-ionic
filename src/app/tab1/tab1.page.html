@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Formulário
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Formulário</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-item>
+        <ion-input name="name" formControlName="name" type="text" placeholder="Cat Name" label="Cat Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <app-cat-color *ngIf="selectedColor" [color]="selectedColor.toString()"></app-cat-color> <ion-button id="open-modal">Select Cat Color</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="save-outline" (click)="save()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="done()">Done</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list *ngIf="message">
+        <ion-item>{{message}}</ion-item>
+      </ion-list>
+      <ion-picker>
+        <ion-picker-column [value]="selectedColor" (ionChange)="colorChanged($event)">
+          <ion-picker-column-option value="#F9A825">Yellow</ion-picker-column-option>
+          <ion-picker-column-option value="#000000">Black</ion-picker-column-option>
+          <ion-picker-column-option value="#FFFFFF">White</ion-picker-column-option>
+          <ion-picker-column-option value="#689F38">Dessa cor eu não tenho</ion-picker-column-option>
+        </ion-picker-column>
+      </ion-picker>
+  </ng-template>
+  </ion-modal>
+  <ion-toast
+    [isOpen]="showMessage"
+    [message]="toastMessage"
+    [duration]="5000"
+  ></ion-toast>
+</ion-content>

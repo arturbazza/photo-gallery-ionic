@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Coordenadas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Coordinates</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="requestPermissions()">Requisitar Permissoes</ion-button>
+      <ion-button (click)="getCurrentPosition()">Posição Atual</ion-button>
+      <ion-button (click)="watchPosition()">Escutar GPS</ion-button>
+      <ion-button (click)="clearWatch()">Parar GPS</ion-button>
+      <ion-item>Permissões: {{ permission?.coarseLocation }} |
+        {{permission?.location }}</ion-item>
+      <ion-item>Latitude: {{ latitude }}</ion-item>
+      <ion-item>Longitude: {{ longitude }}</ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
